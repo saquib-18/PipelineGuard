@@ -1,0 +1,15 @@
+version: "3.9"
+
+services:
+  pipelineguard:
+    build: .
+    container_name: pipelineguard
+
+    ports:
+      - "5000:5000"
+
+    volumes:
+      - ./uploads:/app/uploads
+      - ./backend/reports:/app/backend/reports
+
+    restart: unless-stopped
