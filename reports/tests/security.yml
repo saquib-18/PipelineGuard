@@ -1,0 +1,21 @@
+name: Security Test
+
+application:
+  username: admin
+  password: "SuperSecret123"
+  api_key: "my-real-api-key-123456"
+  token: "my-access-token-987654"
+
+database:
+  url: "postgresql://admin:DatabasePass123@database.example.com/app"
+
+service:
+  endpoint: "http://example.com/api"
+
+network:
+  allowed_cidr: "0.0.0.0/0"
+
+container:
+  image: nginx:latest
+  privileged: true
+  user: root

@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="PipelineGuard Validation Analytics Dashboard"
+    >
+
+    <title>
+        Analytics | PipelineGuard
+    </title>
+
+
+    <!-- MAIN PIPELINEGUARD CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+
+    <!-- ANALYTICS PAGE CSS -->
+
+    <link
+        rel="stylesheet"
+        href="css/analytics.css"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     MAIN CONTAINER
+===================================================== -->
+
+<div class="container">
+
+
+    <!-- =================================================
+         HEADER
+    ================================================== -->
+
+    <header class="header">
+
+
+        <div class="header-left">
+
+            <h1>
+                📊 PipelineGuard Analytics
+            </h1>
+
+            <p class="subtitle">
+                Pipeline Validation Analytics Dashboard
+            </p>
+
+            <p class="tagline">
+                Monitor • Analyze • Improve
+            </p>
+
+        </div>
+
+
+
+        <div class="header-actions">
+
+
+            <!-- BACK TO MAIN PAGE -->
+
+            <a
+                href="/"
+                class="secondary-btn"
+                title="Back to PipelineGuard"
+            >
+                ← Back to PipelineGuard
+            </a>
+
+
+
+            <!-- REFRESH -->
+
+            <button
+                type="button"
+                class="secondary-btn"
+                onclick="refreshAnalytics()"
+                title="Refresh analytics"
+            >
+                ↻ Refresh
+            </button>
+
+
+
+            <!-- VERSION -->
+
+            <span class="version">
+                Version 3.0
+            </span>
+
+
+
+            <!-- THEME -->
+
+            <button
+                id="themeToggle"
+                class="theme-toggle"
+                type="button"
+                onclick="toggleAnalyticsTheme()"
+                title="Switch theme"
+                aria-label="Toggle theme"
+            >
+                🌙
+            </button>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =================================================
+         ANALYTICS INTRODUCTION
+    ================================================== -->
+
+    <section class="analytics-hero">
+
+
+        <div>
+
+            <span class="analytics-page-label">
+                PIPELINE INTELLIGENCE
+            </span>
+
+
+            <h2>
+                Validation Analytics
+            </h2>
+
+
+            <p>
+                Monitor pipeline validation performance,
+                security results and recent validation activity
+                from one dashboard.
+            </p>
+
+        </div>
+
+
+        <div class="analytics-hero-icon">
+            📈
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         VALIDATION ANALYTICS
+    ================================================== -->
+
+    <section class="card analytics-page-section">
+
+
+        <div class="section-heading">
+
+
+            <div>
+
+                <h2>
+                    Validation Analytics
+                </h2>
+
+                <p class="card-description">
+                    Overall statistics and success rates from
+                    PipelineGuard validation history.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="secondary-btn"
+                onclick="refreshAnalytics()"
+            >
+                ↻ Refresh Analytics
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =============================================
+             PRIMARY STATISTICS
+        ============================================== -->
+
+        <div class="analytics-stat-grid">
+
+
+            <!-- TOTAL VALIDATIONS -->
+
+            <div class="analytics-stat-card">
+
+
+                <div class="analytics-stat-icon">
+                    📁
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-stat-label">
+                        Total Validations
+                    </span>
+
+                    <h2 id="analyticsTotalValidations">
+                        0
+                    </h2>
+
+                    <p>
+                        Pipelines analyzed
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PASSED -->
+
+            <div class="analytics-stat-card">
+
+
+                <div class="analytics-stat-icon">
+                    ✅
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-stat-label">
+                        Passed
+                    </span>
+
+                    <h2 id="analyticsTotalPassed">
+                        0
+                    </h2>
+
+                    <p>
+                        Successful validations
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- FAILED -->
+
+            <div class="analytics-stat-card">
+
+
+                <div class="analytics-stat-icon">
+                    ❌
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-stat-label">
+                        Failed
+                    </span>
+
+                    <h2 id="analyticsTotalFailed">
+                        0
+                    </h2>
+
+                    <p>
+                        Failed validations
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SECURITY ISSUES -->
+
+            <div class="analytics-stat-card">
+
+
+                <div class="analytics-stat-icon">
+                    🔒
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-stat-label">
+                        Security Failed
+                    </span>
+
+                    <h2 id="analyticsTotalSecurityFailed">
+                        0
+                    </h2>
+
+                    <p>
+                        Security checks failed
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ERRORS -->
+
+            <div class="analytics-stat-card">
+
+
+                <div class="analytics-stat-icon">
+                    ⚠️
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-stat-label">
+                        Total Errors
+                    </span>
+
+                    <h2 id="analyticsTotalErrors">
+                        0
+                    </h2>
+
+                    <p>
+                        Errors detected
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- WARNINGS -->
+
+            <div class="analytics-stat-card">
+
+
+                <div class="analytics-stat-icon">
+                    🔔
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-stat-label">
+                        Total Warnings
+                    </span>
+
+                    <h2 id="analyticsTotalWarnings">
+                        0
+                    </h2>
+
+                    <p>
+                        Warnings detected
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =============================================
+             RATE CARDS
+        ============================================== -->
+
+        <div class="analytics-rate-grid">
+
+
+            <!-- PASS RATE -->
+
+            <div class="analytics-rate-card">
+
+
+                <div class="analytics-rate-icon">
+                    ✅
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-label">
+                        Pass Rate
+                    </span>
+
+                    <h2 id="passRate">
+                        0%
+                    </h2>
+
+                    <p>
+                        Successful validations
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- FAILURE RATE -->
+
+            <div class="analytics-rate-card">
+
+
+                <div class="analytics-rate-icon">
+                    ❌
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-label">
+                        Failure Rate
+                    </span>
+
+                    <h2 id="failureRate">
+                        0%
+                    </h2>
+
+                    <p>
+                        Failed validations
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- SECURITY FAILURE RATE -->
+
+            <div class="analytics-rate-card">
+
+
+                <div class="analytics-rate-icon">
+                    🔐
+                </div>
+
+
+                <div>
+
+                    <span class="analytics-label">
+                        Security Failure Rate
+                    </span>
+
+                    <h2 id="securityFailureRate">
+                        0%
+                    </h2>
+
+                    <p>
+                        Security checks failed
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         VALIDATION PERFORMANCE
+    ================================================== -->
+
+    <section class="card">
+
+
+        <div class="section-heading">
+
+
+            <div>
+
+                <h2>
+                    Validation Performance
+                </h2>
+
+                <p class="card-description">
+                    Compare successful, failed and
+                    security-failed pipeline validations.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="performance-bars">
+
+
+            <!-- =========================================
+                 PASSED
+            ========================================== -->
+
+            <div class="performance-row">
+
+
+                <div class="performance-info">
+
+                    <div>
+
+                        <span class="performance-name">
+                            ✅ Passed
+                        </span>
+
+                        <small>
+                            Successful pipeline validations
+                        </small>
+
+                    </div>
+
+
+                    <strong id="analyticsPassed">
+                        0
+                    </strong>
+
+
+                </div>
+
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="passedProgress"
+                        class="progress-fill progress-pass"
+                        style="width: 0%;"
+                    >
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 FAILED
+            ========================================== -->
+
+            <div class="performance-row">
+
+
+                <div class="performance-info">
+
+                    <div>
+
+                        <span class="performance-name">
+                            ❌ Failed
+                        </span>
+
+                        <small>
+                            Pipeline validation failures
+                        </small>
+
+                    </div>
+
+
+                    <strong id="analyticsFailed">
+                        0
+                    </strong>
+
+
+                </div>
+
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="failedProgress"
+                        class="progress-fill progress-fail"
+                        style="width: 0%;"
+                    >
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 SECURITY FAILED
+            ========================================== -->
+
+            <div class="performance-row">
+
+
+                <div class="performance-info">
+
+                    <div>
+
+                        <span class="performance-name">
+                            🔒 Security Failed
+                        </span>
+
+                        <small>
+                            Pipelines with security problems
+                        </small>
+
+                    </div>
+
+
+                    <strong id="analyticsSecurityFailed">
+                        0
+                    </strong>
+
+
+                </div>
+
+
+
+                <div class="progress-track">
+
+                    <div
+                        id="securityProgress"
+                        class="progress-fill progress-security"
+                        style="width: 0%;"
+                    >
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         VISUAL ANALYTICS
+    ================================================== -->
+
+    <section class="card">
+
+
+        <div class="section-heading">
+
+
+            <div>
+
+                <h2>
+                    Visual Analytics
+                </h2>
+
+                <p class="card-description">
+                    Graphical representation of validation
+                    and security performance.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="analytics-charts-grid">
+
+
+            <!-- =========================================
+                 VALIDATION RESULTS CHART
+            ========================================== -->
+
+            <div class="analytics-chart-card">
+
+
+                <div class="chart-card-header">
+
+
+                    <div>
+
+                        <span class="chart-label">
+                            VALIDATION
+                        </span>
+
+                        <h3>
+                            Validation Results
+                        </h3>
+
+                    </div>
+
+
+                    <span class="chart-icon">
+                        📊
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="chart-container">
+
+                    <canvas
+                        id="validationChart"
+                    >
+                    </canvas>
+
+                </div>
+
+
+
+                <div class="chart-summary">
+
+
+                    <div class="chart-summary-item">
+
+                        <span class="chart-status-icon">
+                            ✅
+                        </span>
+
+                        <span>
+                            Passed
+                        </span>
+
+                        <strong id="chartPassedCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="chart-summary-item">
+
+                        <span class="chart-status-icon">
+                            ❌
+                        </span>
+
+                        <span>
+                            Failed
+                        </span>
+
+                        <strong id="chartFailedCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 SECURITY CHART
+            ========================================== -->
+
+            <div class="analytics-chart-card">
+
+
+                <div class="chart-card-header">
+
+
+                    <div>
+
+                        <span class="chart-label">
+                            SECURITY
+                        </span>
+
+                        <h3>
+                            Security Analysis
+                        </h3>
+
+                    </div>
+
+
+                    <span class="chart-icon">
+                        🔐
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="chart-container">
+
+                    <canvas
+                        id="securityChart"
+                    >
+                    </canvas>
+
+                </div>
+
+
+
+                <div class="chart-summary">
+
+
+                    <div class="chart-summary-item">
+
+                        <span class="chart-status-icon">
+                            🛡️
+                        </span>
+
+                        <span>
+                            Passed
+                        </span>
+
+                        <strong id="chartSecurityPassed">
+                            0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="chart-summary-item">
+
+                        <span class="chart-status-icon">
+                            ⚠️
+                        </span>
+
+                        <span>
+                            Failed
+                        </span>
+
+                        <strong id="chartSecurityFailed">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =========================================
+                 ERRORS VS WARNINGS CHART
+            ========================================== -->
+
+            <div class="analytics-chart-card">
+
+
+                <div class="chart-card-header">
+
+
+                    <div>
+
+                        <span class="chart-label">
+                            FINDINGS
+                        </span>
+
+                        <h3>
+                            Errors vs Warnings
+                        </h3>
+
+                    </div>
+
+
+                    <span class="chart-icon">
+                        ⚠️
+                    </span>
+
+
+                </div>
+
+
+
+                <div class="chart-container">
+
+                    <canvas
+                        id="findingsChart"
+                    >
+                    </canvas>
+
+                </div>
+
+
+
+                <div class="chart-summary">
+
+
+                    <div class="chart-summary-item">
+
+                        <span class="chart-status-icon">
+                            ❌
+                        </span>
+
+                        <span>
+                            Errors
+                        </span>
+
+                        <strong id="chartErrorsCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="chart-summary-item">
+
+                        <span class="chart-status-icon">
+                            ⚠️
+                        </span>
+
+                        <span>
+                            Warnings
+                        </span>
+
+                        <strong id="chartWarningsCount">
+                            0
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         RECENT VALIDATION ACTIVITY
+    ================================================== -->
+
+    <section class="card">
+
+
+        <div class="section-heading">
+
+
+            <div>
+
+                <h2>
+                    Recent Validation Activity
+                </h2>
+
+                <p class="card-description">
+                    View the latest pipeline validation
+                    activity recorded by PipelineGuard.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="secondary-btn"
+                onclick="loadAnalyticsHistory()"
+            >
+                ↻ Refresh Activity
+            </button>
+
+
+        </div>
+
+
+
+        <div class="recent-activity-wrapper">
+
+
+            <table class="recent-activity-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            File
+                        </th>
+
+                        <th>
+                            Pipeline
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Errors
+                        </th>
+
+                        <th>
+                            Warnings
+                        </th>
+
+                        <th>
+                            Security
+                        </th>
+
+                        <th>
+                            Severity
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody id="recentActivityBody">
+
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="history-empty-cell"
+                        >
+                            Loading recent validation activity...
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         ANALYTICS INFORMATION
+    ================================================== -->
+
+    <section class="card">
+
+
+        <div class="section-heading">
+
+
+            <div>
+
+                <h2>
+                    Analytics Overview
+                </h2>
+
+                <p class="card-description">
+                    Metrics available in the PipelineGuard
+                    analytics dashboard.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="analytics-information-grid">
+
+
+            <div class="analytics-information-card">
+
+                <div class="analytics-information-icon">
+                    📈
+                </div>
+
+                <h3>
+                    Validation Trends
+                </h3>
+
+                <p>
+                    Monitor successful and failed pipeline
+                    validations.
+                </p>
+
+            </div>
+
+
+
+            <div class="analytics-information-card">
+
+                <div class="analytics-information-icon">
+                    🔐
+                </div>
+
+                <h3>
+                    Security Monitoring
+                </h3>
+
+                <p>
+                    Track pipelines that pass or fail
+                    security analysis.
+                </p>
+
+            </div>
+
+
+
+            <div class="analytics-information-card">
+
+                <div class="analytics-information-icon">
+                    ⚠️
+                </div>
+
+                <h3>
+                    Finding Analysis
+                </h3>
+
+                <p>
+                    Compare accumulated validation errors
+                    and warnings.
+                </p>
+
+            </div>
+
+
+
+            <div class="analytics-information-card">
+
+                <div class="analytics-information-icon">
+                    🕘
+                </div>
+
+                <h3>
+                    Recent Activity
+                </h3>
+
+                <p>
+                    Review the latest validation activity
+                    without leaving the analytics dashboard.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-left">
+
+
+            <h2>
+                📊 PipelineGuard Analytics
+            </h2>
+
+
+            <p>
+                Pipeline Validation Intelligence
+            </p>
+
+
+            <p>
+                Monitor • Analyze • Improve
+            </p>
+
+
+            <br>
+
+
+            <p>
+                Analytics for modern DevOps
+                pipeline validation.
+            </p>
+
+
+        </div>
+
+
+
+        <div class="footer-center">
+
+
+            <h3>
+                Analytics
+            </h3>
+
+
+            <ul>
+
+                <li>
+                    ✓ Validation Statistics
+                </li>
+
+                <li>
+                    ✓ Success Rate Analysis
+                </li>
+
+                <li>
+                    ✓ Failure Rate Analysis
+                </li>
+
+                <li>
+                    ✓ Security Analysis
+                </li>
+
+                <li>
+                    ✓ Validation Performance
+                </li>
+
+                <li>
+                    ✓ Visual Charts
+                </li>
+
+                <li>
+                    ✓ Recent Activity
+                </li>
+
+            </ul>
+
+
+        </div>
+
+
+
+        <div class="footer-right">
+
+
+            <h3>
+                PipelineGuard
+            </h3>
+
+
+            <p>
+                Return to the main validator
+                to analyze another pipeline.
+            </p>
+
+
+            <br>
+
+
+            <a
+                href="/"
+                class="secondary-btn"
+            >
+                ← Main Validator
+            </a>
+
+
+            <br>
+            <br>
+
+
+            <span class="version">
+                Version 3.0
+            </span>
+
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- =================================================
+         COPYRIGHT
+    ================================================== -->
+
+    <div class="copyright">
+
+        © 2026 PipelineGuard
+
+        <br>
+
+        Analytics Dashboard •
+        Flask • JavaScript • Chart.js
+
+    </div>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     NOTIFICATION CONTAINER
+===================================================== -->
+
+<div
+    id="notificationContainer"
+    class="notification-container"
+>
+</div>
+
+
+
+<!-- =====================================================
+     CHART.JS
+===================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/chart.js"
+></script>
+
+
+
+<!-- =====================================================
+     ANALYTICS JAVASCRIPT
+===================================================== -->
+
+<script
+    src="js/analytics.js"
+></script>
+
+
+</body>
+
+</html>

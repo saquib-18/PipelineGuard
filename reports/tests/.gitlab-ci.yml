@@ -1,0 +1,24 @@
+stages:
+  - build
+  - test
+
+build_job:
+
+  stage: build
+
+  script:
+    - echo "Building PipelineGuard"
+
+  retry: 2
+  timeout: 10m
+
+
+test_job:
+
+  stage: test
+
+  script:
+    - echo "Testing PipelineGuard"
+
+  retry: 2
+  timeout: 10m

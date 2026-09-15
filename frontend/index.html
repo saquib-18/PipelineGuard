@@ -5,73 +5,1200 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>PipelineGuard</title>
+    <meta
+        name="description"
+        content="PipelineGuard - Pipeline-as-Code Linter and Validator"
+    >
 
-    <link rel="stylesheet"
-          href="css/style.css">
+    <title>
+        PipelineGuard | Pipeline-as-Code Validator
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
 
 </head>
 
+
 <body>
+
 
 <div class="container">
 
-    <h1>🚀 PipelineGuard</h1>
 
-    <p class="subtitle">
-        Pipeline-as-Code Linter & Validator
-    </p>
+    <!-- =================================================
+         HEADER
+    ================================================== -->
 
-    <div class="card">
+    <header class="header">
 
-        <h2>Upload Pipeline File</h2>
+        <div class="header-left">
 
-        <input
-            type="file"
-            id="fileInput">
+            <h1>
+                🚀 PipelineGuard
+            </h1>
 
-        <br>
+            <p class="subtitle">
+                Pipeline-as-Code Linter &amp; Validator
+            </p>
 
-        <button onclick="uploadFile()">
-            Upload & Validate
-        </button>
-
-    </div>
-
-    <div class="card">
-
-        <h2>Validation Report</h2>
-
-        <div id="result">
-
-            Waiting for validation...
+            <p class="tagline">
+                Validate • Secure • Analyze • Automate
+            </p>
 
         </div>
 
-    </div>
 
-    <div class="footer">
+        <div class="header-actions">
 
-        <hr><br>
+            <span class="version">
+                Version 3.0
+            </span>
 
-        <p>
+            <a
+                href="/analytics.html"
+                class="analytics-link"
+                title="Open Analytics"
+            >
+                📊 Analytics
+            </a>
 
-            PipelineGuard v2.0
+            <button
+                id="themeToggle"
+                class="theme-toggle"
+                type="button"
+                onclick="toggleTheme()"
+                title="Switch theme"
+                aria-label="Toggle theme"
+            >
+                🌙
+            </button>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         DASHBOARD
+    ================================================== -->
+
+    <section class="dashboard-section">
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Dashboard
+                </h2>
+
+                <p class="card-description">
+                    Overview of your pipeline validation activity.
+                </p>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="secondary-btn"
+                onclick="loadDashboard()"
+            >
+                ↻ Refresh
+            </button>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+
+            <!-- TOTAL -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    📁
+                </div>
+
+                <div>
+
+                    <span class="dashboard-label">
+                        Total Validations
+                    </span>
+
+                    <h1 id="totalFiles">
+                        0
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PASSED -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    ✅
+                </div>
+
+                <div>
+
+                    <span class="dashboard-label">
+                        Passed
+                    </span>
+
+                    <h1 id="passedFiles">
+                        0
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FAILED -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    ❌
+                </div>
+
+                <div>
+
+                    <span class="dashboard-label">
+                        Failed
+                    </span>
+
+                    <h1 id="failedFiles">
+                        0
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SECURITY -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    🔒
+                </div>
+
+                <div>
+
+                    <span class="dashboard-label">
+                        Security Issues
+                    </span>
+
+                    <h1 id="securityIssues">
+                        0
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ERRORS -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    ⚠️
+                </div>
+
+                <div>
+
+                    <span class="dashboard-label">
+                        Total Errors
+                    </span>
+
+                    <h1 id="totalErrors">
+                        0
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- WARNINGS -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    🔔
+                </div>
+
+                <div>
+
+                    <span class="dashboard-label">
+                        Total Warnings
+                    </span>
+
+                    <h1 id="totalWarnings">
+                        0
+                    </h1>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         UPLOAD PIPELINE
+    ================================================== -->
+
+    <section class="card">
+
+        <h2>
+            Upload Pipeline File
+        </h2>
+
+        <p class="card-description">
+            Upload a pipeline configuration to run validation,
+            configuration analysis and security scanning.
+        </p>
+
+
+        <div
+            id="dropZone"
+            class="drop-zone"
+        >
+
+            <div class="upload-icon">
+                📂
+            </div>
+
+            <h3>
+                Drop your pipeline file here
+            </h3>
+
+            <p>
+                or click to select a file
+            </p>
+
+
+            <input
+                type="file"
+                id="fileInput"
+                accept="*/*"
+            >
+
+
+            <p class="supported-files">
+
+                Supported:
+                YAML • GitHub Actions • GitLab CI •
+                Jenkinsfile • Docker Compose •
+                Kubernetes • Terraform
+
+            </p>
+
+
+            <p class="max-file-size">
+                Maximum file size: 5 MB
+            </p>
+
+        </div>
+
+
+
+        <div class="selected-file">
+
+            <div>
+
+                <span class="selected-file-label">
+                    Selected file
+                </span>
+
+                <div id="selectedFileName">
+                    No file selected
+                </div>
+
+            </div>
+
+
+            <div id="selectedFileSize">
+                0 B
+            </div>
+
+        </div>
+
+
+
+        <div class="upload-actions">
+
+            <button
+                type="button"
+                class="primary-btn"
+                onclick="uploadFile()"
+            >
+                🔍 Validate Pipeline
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         VALIDATION REPORT
+    ================================================== -->
+
+    <section class="card">
+
+        <h2>
+            Validation Report
+        </h2>
+
+        <p class="card-description">
+            Validation results, errors, warnings and security
+            findings will appear below.
+        </p>
+
+
+        <div id="result">
+
+            <div class="history-empty">
+
+                <p>
+                    No pipeline analyzed yet.
+                </p>
+
+                <span>
+                    Upload a pipeline file to start validation.
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         VALIDATION HISTORY
+    ================================================== -->
+
+    <section class="card history-section">
+
+
+        <div class="history-header">
+
+            <div>
+
+                <h2>
+                    Validation History
+                </h2>
+
+                <p class="card-description">
+                    Review your latest pipeline validations,
+                    statuses and generated reports.
+                </p>
+
+            </div>
+
+
+            <div class="history-actions">
+
+                <button
+                    type="button"
+                    class="secondary-btn"
+                    onclick="loadHistory()"
+                >
+                    ↻ Refresh
+                </button>
+
+
+                <button
+                    type="button"
+                    class="danger-btn"
+                    onclick="clearHistory()"
+                >
+                    🗑 Clear History
+                </button>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="history-table-wrapper">
+
+            <table class="history-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            File
+                        </th>
+
+                        <th>
+                            Pipeline
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Errors
+                        </th>
+
+                        <th>
+                            Warnings
+                        </th>
+
+                        <th>
+                            Severity
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                        <th>
+                            Actions
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody id="historyTableBody">
+
+                    <tr>
+
+                        <td
+                            colspan="8"
+                            class="history-empty-cell"
+                        >
+                            Loading validation history...
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+        <div
+            id="historyList"
+            style="display: none;"
+        >
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =================================================
+         PIPELINE TYPE BREAKDOWN
+    ================================================== -->
+
+    <section class="card pipeline-breakdown-section">
+
+
+        <div class="section-heading">
+
+            <div>
+
+                <h2>
+                    Pipeline Type Breakdown
+                </h2>
+
+                <p class="card-description">
+                    Number of validations recorded for each
+                    supported pipeline type.
+                </p>
+
+            </div>
+
+
+            <span class="version">
+                Live
+            </span>
+
+        </div>
+
+
+        <div class="pipeline-breakdown-grid">
+
+
+            <!-- GITHUB -->
+
+            <div class="pipeline-breakdown-card">
+
+                <div class="pipeline-breakdown-icon">
+                    ⚙️
+                </div>
+
+                <div class="pipeline-breakdown-content">
+
+                    <span>
+                        GitHub Actions
+                    </span>
+
+                    <strong id="githubCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- GITLAB -->
+
+            <div class="pipeline-breakdown-card">
+
+                <div class="pipeline-breakdown-icon">
+                    🦊
+                </div>
+
+                <div class="pipeline-breakdown-content">
+
+                    <span>
+                        GitLab CI
+                    </span>
+
+                    <strong id="gitlabCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- JENKINS -->
+
+            <div class="pipeline-breakdown-card">
+
+                <div class="pipeline-breakdown-icon">
+                    🔧
+                </div>
+
+                <div class="pipeline-breakdown-content">
+
+                    <span>
+                        Jenkins Pipeline
+                    </span>
+
+                    <strong id="jenkinsCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- DOCKER -->
+
+            <div class="pipeline-breakdown-card">
+
+                <div class="pipeline-breakdown-icon">
+                    🐳
+                </div>
+
+                <div class="pipeline-breakdown-content">
+
+                    <span>
+                        Docker Compose
+                    </span>
+
+                    <strong id="dockerCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- KUBERNETES -->
+
+            <div class="pipeline-breakdown-card">
+
+                <div class="pipeline-breakdown-icon">
+                    ☸️
+                </div>
+
+                <div class="pipeline-breakdown-content">
+
+                    <span>
+                        Kubernetes
+                    </span>
+
+                    <strong id="kubernetesCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TERRAFORM -->
+
+            <div class="pipeline-breakdown-card">
+
+                <div class="pipeline-breakdown-icon">
+                    🏗️
+                </div>
+
+                <div class="pipeline-breakdown-content">
+
+                    <span>
+                        Terraform
+                    </span>
+
+                    <strong id="terraformCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- YAML -->
+
+            <div class="pipeline-breakdown-card">
+
+                <div class="pipeline-breakdown-icon">
+                    📄
+                </div>
+
+                <div class="pipeline-breakdown-content">
+
+                    <span>
+                        YAML
+                    </span>
+
+                    <strong id="yamlCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- OTHER -->
+
+            <div class="pipeline-breakdown-card">
+
+                <div class="pipeline-breakdown-icon">
+                    📦
+                </div>
+
+                <div class="pipeline-breakdown-content">
+
+                    <span>
+                        Other
+                    </span>
+
+                    <strong id="otherCount">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         SUPPORTED PIPELINE TYPES
+    ================================================== -->
+
+    <section class="card">
+
+        <h2>
+            Supported Pipeline Types
+        </h2>
+
+        <p class="card-description">
+            PipelineGuard currently supports validation and
+            analysis for the following DevOps configurations.
+        </p>
+
+
+        <div class="summary-grid">
+
+
+            <div class="summary-item">
+
+                <span>
+                    Configuration
+                </span>
+
+                <strong>
+                    📄 YAML
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    CI/CD
+                </span>
+
+                <strong>
+                    GitHub Actions
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    CI/CD
+                </span>
+
+                <strong>
+                    GitLab CI
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    CI/CD
+                </span>
+
+                <strong>
+                    Jenkins Pipeline
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Container
+                </span>
+
+                <strong>
+                    Docker Compose
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Orchestration
+                </span>
+
+                <strong>
+                    Kubernetes
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Infrastructure
+                </span>
+
+                <strong>
+                    Terraform
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Security
+                </span>
+
+                <strong>
+                    🔒 Secret Scanner
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         PIPELINEGUARD FEATURES
+    ================================================== -->
+
+    <section class="card">
+
+        <h2>
+            PipelineGuard Features
+        </h2>
+
+        <p class="card-description">
+            PipelineGuard combines pipeline validation,
+            static analysis, security scanning and reporting.
+        </p>
+
+
+        <div class="summary-grid">
+
+
+            <div class="summary-item">
+
+                <span>
+                    Validation
+                </span>
+
+                <strong>
+                    Syntax Checking
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Detection
+                </span>
+
+                <strong>
+                    Pipeline Type Detection
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Analysis
+                </span>
+
+                <strong>
+                    Configuration Analysis
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Security
+                </span>
+
+                <strong>
+                    Secret Detection
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Security
+                </span>
+
+                <strong>
+                    Security Analysis
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Reporting
+                </span>
+
+                <strong>
+                    PDF Reports
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    History
+                </span>
+
+                <strong>
+                    Validation Tracking
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Dashboard
+                </span>
+
+                <strong>
+                    Validation Statistics
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Analytics
+                </span>
+
+                <strong>
+                    Success &amp; Failure Rates
+                </strong>
+
+            </div>
+
+
+            <div class="summary-item">
+
+                <span>
+                    Analytics
+                </span>
+
+                <strong>
+                    Pipeline Usage Analysis
+                </strong>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         FOOTER
+    ================================================== -->
+
+    <footer class="footer">
+
+
+        <div class="footer-left">
+
+            <h2>
+                🚀 PipelineGuard
+            </h2>
+
+            <p>
+                Pipeline-as-Code Linter &amp; Validator
+            </p>
+
+            <p>
+                Validate • Secure • Analyze • Automate
+            </p>
 
             <br>
 
-            Developed for DevOps Pipeline Validation
+            <p>
+                Static analysis for modern
+                DevOps pipeline configurations.
+            </p>
 
-        </p>
+        </div>
+
+
+
+        <div class="footer-center">
+
+            <h3>
+                Features
+            </h3>
+
+            <ul>
+
+                <li>
+                    ✓ YAML Validation
+                </li>
+
+                <li>
+                    ✓ GitHub Actions Validation
+                </li>
+
+                <li>
+                    ✓ GitLab CI Validation
+                </li>
+
+                <li>
+                    ✓ Jenkins Validation
+                </li>
+
+                <li>
+                    ✓ Docker Validation
+                </li>
+
+                <li>
+                    ✓ Kubernetes Validation
+                </li>
+
+                <li>
+                    ✓ Terraform Validation
+                </li>
+
+                <li>
+                    ✓ Security Scanning
+                </li>
+
+                <li>
+                    ✓ PDF Reporting
+                </li>
+
+                <li>
+                    ✓ Validation History
+                </li>
+
+                <li>
+                    ✓ Dashboard Statistics
+                </li>
+
+                <li>
+                    ✓ Validation Analytics
+                </li>
+
+            </ul>
+
+        </div>
+
+
+
+        <div class="footer-right">
+
+            <h3>
+                Project
+            </h3>
+
+            <p>
+                Developed for
+            </p>
+
+            <h4>
+                DevOps Project
+            </h4>
+
+            <br>
+
+            <span class="version">
+                Version 3.0
+            </span>
+
+        </div>
+
+
+    </footer>
+
+
+
+    <!-- =================================================
+         COPYRIGHT
+    ================================================== -->
+
+    <div class="copyright">
+
+        © 2026 PipelineGuard
+
+        <br>
+
+        Built using
+        Flask • Python • HTML • CSS • JavaScript •
+        ReportLab • GitHub Actions
 
     </div>
 
+
 </div>
 
+
+
+<!-- =================================================
+     NOTIFICATION CONTAINER
+===================================================== -->
+
+<div
+    id="notificationContainer"
+    class="notification-container"
+>
+</div>
+
+
+
 <script src="js/script.js"></script>
+
 
 </body>
 

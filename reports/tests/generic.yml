@@ -1,0 +1,16 @@
+application:
+  name: PipelineGuard
+  version: "3.0"
+
+server:
+  host: localhost
+  port: 5000
+
+settings:
+  validation_enabled: true
+  security_scan: true
+  report_format: pdf
+
+database:
+  name: pipelineguard
+  connection_pool: 10

@@ -1,2 +1,15 @@
-username: admin
-password: admin123
+name: Security Test
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    env:
+      password: admin123
+      api_key: abc123
+      secret_key: mysecret
+      token: test-token-123
+
+    steps:
+      - name: Security Test
+        run: echo "Testing PipelineGuard security scanner"
